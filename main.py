@@ -169,6 +169,9 @@ health1_rect = pygame.Rect(10, 10, 110, 30)
 end_rect = pygame.Rect(130, 10, 50, 30)
 font = pygame.font.Font(None, 20)
 exit_image = pygame.transform.scale(load_image('exit.png'), (end_rect.width, end_rect.height))
+fon1 = pygame.transform.scale(load_image('fon1.png'), (WIDTH, HEIGHT))
+fon2 = pygame.transform.scale(load_image('fon2.png'), (WIDTH, HEIGHT))
+fon3 = pygame.transform.scale(load_image('fon3.png'), (WIDTH, HEIGHT))
 
 # основной цикл
 while True:
@@ -203,7 +206,12 @@ while True:
         if any([left, right, up, down]):
             player_group.update(left, right, up, down)
             tiles_group.update()
-        screen.fill('black')
+        if current_level == 'level_1':
+            screen.blit(fon1, (0, 0))
+        elif current_level == 'level_2':
+            screen.blit(fon2, (0, 0))
+        elif current_level == 'level_3':
+            screen.blit(fon3, (0, 0))
 
         # изменяем ракурс камеры
         camera.update(player)
@@ -223,6 +231,7 @@ while True:
 
         all_sprites.draw(screen)
         player_group.draw(screen)
+
         screen.blit(exit_image, (end_rect.x, end_rect.y))
 
         # уровень пройден успешно, смерть или выход в меню
